@@ -20,7 +20,7 @@ class TutorialPipeline(object):
             raise DropItem('missing url')
         if not os.path.exists(item['board']): os.makedirs(item['board'])
 
-        filename = item['url'].split("/")[-1]
+        filename = item['url'].split("/")[-1] + ".json"
         with codecs.open(os.path.join(item['board'], filename), "w") as fh:
             fh.write(json.dumps(item, indent=4, sort_keys=True))
         return item
