@@ -1,31 +1,26 @@
 import scrapy
 from scrapy.selector import Selector
-import json
-import os.path
+import re
+
 
 class SoftJobSpider(scrapy.Spider):
     name = "softjob"
-    skip_page_uris = ['/bbs/Soft_Job/index1.html', '/bbs/Soft_Job/index.html']
-
+    page_template = 'https://www.ptt.cc/bbs/Soft_Job/index%d.html'
+    
     def start_requests(self):
         url = 'https://www.ptt.cc/bbs/Soft_Job/index.html'
-        request = scrapy.Request(url=url, callback=self.parse_next_page)
-        request.meta['page'] = 0
-        yield request
+        yield scrapy.Request(url=url, callback=self.parse_page_list)
 
-    def parse_next_page(self, response):
-        yield response.follow(response.url, self.parse_list)
+    def parse_page_list(self, response):
         for url in response.css('.btn-group-paging a::attr(href)').extract():
-            yield response.follow(url, self.parse_list)
-            if url in self.skip_page_uris: continue
-            request = response.follow(url, self.parse_next_page)
-            if 'page' not in response.meta:
-                request.meta['page'] = 0
-            else:
-                request.meta['page'] = response.meta['page'] + 1
+            page_number = re.findall('index(\d+).html', url)
+            if page_number:
+                number = int(page_number[0])
+                if number > 1:
+                    for page in range(number, number - 10, -1):
+                        url = self.page_template % page
+                        yield scrapy.Request(url=url, callback=self.parse_list)
 
-            if request.meta['page'] <= 5:
-                yield request
 
     def parse_list(self, response):
         print "parse_list", response.url
