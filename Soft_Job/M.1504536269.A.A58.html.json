@@ -1,0 +1,27 @@
+{
+    "author": "maurlice (\u98db\u9032\u6211\u7684\u5929\u7a7a)", 
+    "board": "Soft_Job", 
+    "content": [
+        "\n\u73fe\u6210\u7684arduino library\n\n", 
+        "\n\n\u518d\u53bb\u9732\u5929\u8cb7\u4e00\u652fnano\uff0c\u4e0d\u7528\u8cb7\u6b63\u54c1\uff0c\u786c\u4ef6\u4e5f\u662f\u958b\u6e90\uff0c300\u5de6\u53f3\u7684\u50f9\u4f4d\u5c31\u5f88\u597d\u7528\u4e86\u3002\n\u9019\u6a23\u5b78\u6bd4\u8f03\u5feb\u5566\u3002\n\n\n\n", 
+        "\u203b \u5f15\u8ff0\u300avito9580 (vito)\u300b\u4e4b\u9298\u8a00\uff1a\n", 
+        ">> : \u5404\u4f4d\u524d\u8f29\u597d\uff0c\u6700\u8fd1\u5728\u7814\u8b80EEPROM 24LC16,\u4f46\u6709\u5e7e\u9ede\u7121\u6cd5\u7406\u89e3\uff0c\u60f3\u8acb\u6559\u677f\u4e0a\u7684\u524d\u8f29\u3002\n", 
+        ">> : ", 
+        ">> : (figure.1)\n", 
+        ">> : ", 
+        ">> : (figure.2)\n", 
+        ">> : \u5716\u4e00\u7684word address\u8a72\u600e\u9ebc\u7d66?\u6211\u67e524LC16\u9019\u9846\u7684spec\u4e0a\u4e26\u6c92\u6709\u50cf\u5716\u4e8c\u4e00\u6a23\u8aaa\u660eaddress\n", 
+        "\uff0c\n", 
+        ">> : \u4e26\u4e14\u662f\u5426master\u6bcf\u50b3\u4e00\u6b21data\u524d\u7684\u5beb\u5165address\u6703\u4e0d\u4e00\u6a23?\n", 
+        ">> : \u61c7\u8acb\u4e86\u89e3I2C\u7684\u524d\u8f29\u76f8\u6551\uff0c\u8b1d\u8b1d\n", 
+        "\n--\n", 
+        "\u203b \u767c\u4fe1\u7ad9: \u6279\u8e22\u8e22\u5be6\u696d\u574a(ptt.cc), \u4f86\u81ea: 1.172.87.16\n", 
+        "\u203b \u6587\u7ae0\u7db2\u5740: \n", 
+        "\u2192 hizuki: \u9019\u6a23\u5b78\u6211\u662f\u89ba\u5f97\u6c92\u6cd5\u61c2\u5f97IIC\u5354\u5b9a\u7684\uff0c\u96fb\u5b50\u7cfb\u4e0d\u8981\u9019\u6a23\u641e 09/05 10:56\n", 
+        "\u5653 final01: \u9019\u8ddf87\u5206\u50cf 09/05 14:08\n", 
+        "\u63a8 chrisdar: \u518d\u52a0\u639b \u908f\u8f2f\u5206\u6790\u5100\u770b\u6ce2\u5f62\u963f 09/10 04:04\n"
+    ], 
+    "publish_datetime": "Mon Sep  4 22:44:26 2017", 
+    "title": "Re: [\u8acb\u76ca] I2C EEPROM Start address", 
+    "url": "https://www.ptt.cc/bbs/Soft_Job/M.1504536269.A.A58.html"
+}

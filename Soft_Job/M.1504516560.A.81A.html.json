@@ -1,0 +1,17 @@
+{
+    "author": "qazsd (\u73cd\u60dc\u7576\u4e0b)", 
+    "board": "Soft_Job", 
+    "content": [
+        "\n\n\u85c9\u52a9\u4e00\u4e0b\u8edf\u9ad4\u7248\u5ee3\u5927\u7684\u4eba\u6c23\uff0c\u8acb\u554f\u677f\u4e0a\u524d\u8f29\u5011\n\n\u5c0f\u5f1f\u6709Maven\u5c08\u6848\u8cc7\u6599\u593e\u7d50\u69cb\u5982\u4e0b:\n\nProject\n  \u251csrc/main/java\n  \u2502      \u2514 com.abc.xyz\n  \u2502              \u2514Auth.java\n  \u2514src/main/resources\n          \u2514certs\n              \u2514credential.p12\n\n\nAuth.java\u88e1\u6709\u6bb5\u7a0b\u5f0f\u78bc\u7528\u4f86\u9a57\u8b49\uff1a\n=====================================================================\nFile file = new File(classLoader.getResource(\"cert.p12\").getFile());\nString ", 
+        " = file.getAbsolutePath();\n\nGoogleCredential credential = new GoogleCredential.Builder()\n     .setTransport(httpTransport)\n     .setJsonFactory(JSON_FACTORY)\n     .setServiceAccountId(SERVICE_ACCOUNT_EMAIL)\n     .setServiceAccountScopes(Collections.singleton(\n                      CalendarScopes.CALENDAR_READONLY))\n     .setServiceAccountPrivateKeyFromP12File(new File(", 
+        "))\n     .setServiceAccountUser(SERVICE_ACCOUNT_USER)\n     .build();\n=====================================================================\n\n\u5c07\u8a72\u5c08\u6848\u6a94\u7684jar\u90e8\u7f72\u5230Server\u4e0a\u5f8c\n\n\u6703\u51fa\u73fe\u627e\u4e0d\u5230credential\u6a94\u6848\u7684\u932f\u8aa4\u8a0a\u606f\n\n\u60f3\u8acb\u554fcredential\u6a94\u6848\u61c9\u8a72\u653e\u5728\u5c08\u6848\u6216server\u54ea\u88e1\u624d\u80fd\u88ab\u627e\u5230\uff1f\n\n\u53c8\u8a72\u600e\u9ebc\u6307\u5b9a\u8def\u5f91\u5462\uff1f\n\n--\n", 
+        "\u203b \u767c\u4fe1\u7ad9: \u6279\u8e22\u8e22\u5be6\u696d\u574a(ptt.cc), \u4f86\u81ea: 59.124.165.65\n", 
+        "\u203b \u6587\u7ae0\u7db2\u5740: \n", 
+        "\u63a8 gpctv: \u4f60\u6709\u8a66\u8457\u5370\u51fa\u4f86\u770b\u770b\u55ce 09/04 18:08\n", 
+        "\u2192 alan3100: \"java read file from jar\" \u554fgoogle 09/05 08:20\n", 
+        "\u63a8 mureka: \u8a66\u8a66\u770b\u5c07p12\u6a94\u79fb\u5230src\u5e95\u4e0b\uff0c\u6216\u662fresources\u5e95\u4e0b 09/15 06:08\n"
+    ], 
+    "publish_datetime": "Mon Sep  4 17:15:56 2017", 
+    "title": "[\u8acb\u76ca] \u90e8\u7f72\u5230server\u5f8c\u627e\u4e0d\u5230\u6a94\u6848", 
+    "url": "https://www.ptt.cc/bbs/Soft_Job/M.1504516560.A.81A.html"
+}
