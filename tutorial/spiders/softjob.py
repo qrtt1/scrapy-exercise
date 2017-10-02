@@ -5,7 +5,6 @@ import os.path
 
 class SoftJobSpider(scrapy.Spider):
     name = "softjob"
-    base_url = 'https://www.ptt.cc'
     skip_page_uris = ['/bbs/Soft_Job/index1.html', '/bbs/Soft_Job/index.html']
 
     def start_requests(self):
@@ -19,9 +18,7 @@ class SoftJobSpider(scrapy.Spider):
         for url in response.css('.btn-group-paging a::attr(href)').extract():
             yield response.follow(url, self.parse_list)
             if url in self.skip_page_uris: continue
-            next_page_url = self.base_url + url
-            print "next_page_url", next_page_url
-            request = scrapy.Request(url=next_page_url, callback=self.parse_next_page)
+            request = response.follow(url, self.parse_next_page)
             if 'page' not in response.meta:
                 request.meta['page'] = 0
             else:
