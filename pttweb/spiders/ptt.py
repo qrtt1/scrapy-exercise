@@ -23,7 +23,7 @@ class PttWebSpider(scrapy.Spider):
             if page_number:
                 number = int(page_number[0])
                 if number > 1:
-                    for page in range(number - int(self.max_fetch), number):
+                    for page in range(number - int(self.max_fetch), number + 1):
                         url = self.page_template % (self.board, page)
                         yield scrapy.Request(url=url, callback=self.parse_list)
 
