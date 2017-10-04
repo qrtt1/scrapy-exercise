@@ -11,7 +11,7 @@ class PttWebSpider(scrapy.Spider):
     def __init(self, board='', max_fetch=1, local_storage_path='./'):
         self.board = board
         self.max_fetch = int(max_fetch)
-        self.local_storage_path = os.path.abspath(local_storage_path)
+        self.local_storage_path = os.path.abspath(os.path.expanduser(local_storage_path))
 
     def start_requests(self):
         url = 'https://www.ptt.cc/bbs/%s/index.html' % (self.board)
@@ -33,12 +33,15 @@ class PttWebSpider(scrapy.Spider):
             yield response.follow(x, self.save_text)
 
     def extract_metadata(self, response):
-        author, board, title, publish_datetime = response.css(
-            "#main-content span.article-meta-value::text").extract()
-        return {'author': author,
-                'board': board,
-                'title': title,
-                'publish_datetime': publish_datetime, 'url': response.url}
+        try:
+            author, board, title, publish_datetime = response.css(
+                "#main-content span.article-meta-value::text").extract()
+            return {'author': author,
+                    'board': board,
+                    'title': title,
+                    'publish_datetime': publish_datetime, 'url': response.url}
+        except:
+            return {'url': response.url, 'board': self.board}
 
     def save_text(self, response):
         result = self.extract_metadata(response)
