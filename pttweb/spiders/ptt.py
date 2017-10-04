@@ -1,17 +1,17 @@
 import scrapy
 from scrapy.selector import Selector
 import re
+import os.path
 
 
 class PttWebSpider(scrapy.Spider):
     name = "pttweb"
     page_template = 'https://www.ptt.cc/bbs/%s/index%d.html'
 
-    def __init(self, board='', max_fetch=1):
-        if not board:
-            raise ValueError('[board] is required')
+    def __init(self, board='', max_fetch=1, local_storage_path='./'):
         self.board = board
         self.max_fetch = int(max_fetch)
+        self.local_storage_path = os.path.abspath(local_storage_path)
 
     def start_requests(self):
         url = 'https://www.ptt.cc/bbs/%s/index.html' % (self.board)
@@ -32,21 +32,22 @@ class PttWebSpider(scrapy.Spider):
         for x in response.css('.r-list-container div a::attr(href)'):
             yield response.follow(x, self.save_text)
 
+    def extract_metadata(self, response):
+        author, board, title, publish_datetime = response.css(
+            "#main-content span.article-meta-value::text").extract()
+        return {'author': author,
+                'board': board,
+                'title': title,
+                'publish_datetime': publish_datetime, 'url': response.url}
+
     def save_text(self, response):
-        result = {}
+        result = self.extract_metadata(response)
         main_content = response.css("#main-content").extract_first()
         result.update({'text': re.sub(r'<[^>]+/?>', '', main_content)})
         yield result
 
     def save_page(self, response):
-        author, board, title, publish_datetime = response.css(
-            "#main-content span.article-meta-value::text").extract()
-        result = {
-            'author': author,
-            'board': board,
-            'title': title,
-            'publish_datetime': publish_datetime}
-
+        result = self.extract_metadata(response)
         content = []
         for x in response.css(
                 "#main-content::text, #main-content > div.push, #main-content > span.f2, #main-content span.f6").extract():
@@ -63,5 +64,5 @@ class PttWebSpider(scrapy.Spider):
             else:
                 content += [x]
 
-        result.update({'url': response.url, 'content': content})
+        result['content'] = content
         yield result
