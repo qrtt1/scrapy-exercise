@@ -7,11 +7,11 @@ class PttWebSpider(scrapy.Spider):
     name = "pttweb"
     page_template = 'https://www.ptt.cc/bbs/%s/index%d.html'
 
-    def __init(self, board='', max_fetch_page=10):
+    def __init(self, board='', max_fetch=1):
         if not board:
             raise ValueError('[board] is required')
         self.board = board
-        self.max_fetch_page = max_fetch_page
+        self.max_fetch = int(max_fetch)
 
     def start_requests(self):
         url = 'https://www.ptt.cc/bbs/%s/index.html' % (self.board)
@@ -23,7 +23,7 @@ class PttWebSpider(scrapy.Spider):
             if page_number:
                 number = int(page_number[0])
                 if number > 1:
-                    for page in range(number - self.max_fetch_page, number):
+                    for page in range(number - int(self.max_fetch), number):
                         url = self.page_template % (self.board, page)
                         yield scrapy.Request(url=url, callback=self.parse_list)
 
